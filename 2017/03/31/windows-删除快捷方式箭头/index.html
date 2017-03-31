@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>ubuntu终端颜色配置 | Liao&#39;s Blog</title>
+    <title>windows 删除快捷方式箭头 | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+    <meta name="description" content="windows 删除快捷方式箭头的脚本。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu终端颜色配置">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/index.html">
+<meta property="og:title" content="windows 删除快捷方式箭头">
+<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/windows-删除快捷方式箭头/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
-<meta property="og:updated_time" content="2017-03-31T09:12:28.357Z">
+<meta property="og:description" content="windows 删除快捷方式箭头的脚本。">
+<meta property="og:updated_time" content="2017-03-31T10:17:43.866Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu终端颜色配置">
-<meta name="twitter:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+<meta name="twitter:title" content="windows 删除快捷方式箭头">
+<meta name="twitter:description" content="windows 删除快捷方式箭头的脚本。">
 
     
     
@@ -82,119 +82,24 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/31/ubuntu终端颜色配置/" title="ubuntu终端颜色配置" itemprop="url">ubuntu终端颜色配置</a>
+      <a href="/2017/03/31/windows-删除快捷方式箭头/" title="windows 删除快捷方式箭头" itemprop="url">windows 删除快捷方式箭头</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-31T08:53:20.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+    <time datetime="2017-03-31T10:14:52.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。</p>
+		<p>windows 删除快捷方式箭头的脚本。</p>
 <a id="more"></a>
-<ol>
-<li><p>首先在终端里面用 gedit 打开配置文件（~/.bashrc），如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gedit ~/.bashrc</div></pre></td></tr></table></figure>
-</li>
-<li><p>在最后添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS1=<span class="string">'\[\033[1;31;40m\]\u@\h:\w\$\[\033[00m\] '</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>重启终端，你就可以看到你的配色了，或者执行 source .bashrc 命令也可以运行新的配色。</p>
-</li>
-</ol>
-<p><strong> 配色过程： </strong></p>
-<table>
-<thead>
-<tr>
-<th>前景</th>
-<th>背景</th>
-<th>颜色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>30</td>
-<td>40</td>
-<td>黑色</td>
-</tr>
-<tr>
-<td>31</td>
-<td>41</td>
-<td>紅色</td>
-</tr>
-<tr>
-<td>32</td>
-<td>42</td>
-<td>绿色</td>
-</tr>
-<tr>
-<td>33</td>
-<td>43</td>
-<td>黄色</td>
-</tr>
-<tr>
-<td>34</td>
-<td>44</td>
-<td>蓝色</td>
-</tr>
-<tr>
-<td>35</td>
-<td>45</td>
-<td>紫红色</td>
-</tr>
-<tr>
-<td>36</td>
-<td>46</td>
-<td>青蓝色</td>
-</tr>
-<tr>
-<td>37</td>
-<td>47</td>
-<td>白色</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>OFF</td>
-</tr>
-<tr>
-<td>1</td>
-<td>高亮显示</td>
-</tr>
-<tr>
-<td>4</td>
-<td>underline</td>
-</tr>
-<tr>
-<td>5</td>
-<td>闪烁</td>
-</tr>
-<tr>
-<td>7</td>
-<td>反白显示</td>
-</tr>
-<tr>
-<td>8</td>
-<td>不可见</td>
-</tr>
-</tbody>
-</table>
-<p>一个单独的颜色设置:<code>\033[代码;前景;背景m</code>，如：<code>\[\033[1;32;40m\]</code>表示高亮显示字体为绿色，背景色为黑色。</p>
-<p>注意：颜色的设置，放在相应的要设置的前面，如用户名颜色设置：<code>\[\033[01;35;40m\]\u</code></p>
+<p>删除快捷方式的箭头：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">reg add <span class="string">"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons"</span> /v 29 /d <span class="string">"%systemroot%\system32\imageres.dll,197"</span> /t reg_sz /f</div><div class="line">taskkill /f /im explorer.exe</div><div class="line">attrib <span class="_">-s</span> -r -h <span class="string">"%userprofile%\AppData\Local\iconcache.db"</span></div><div class="line">del <span class="string">"%userprofile%\AppData\Local\iconcache.db"</span> /f /q</div><div class="line">start explorer</div><div class="line">pause</div><div class="line">`</div></pre></td></tr></table></figure></p>
+<p>同样，如果想恢复快捷方式小箭头，只需要将文本文件的内容改成以下内容即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">reg delete <span class="string">"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons"</span> /v 29 /f</div><div class="line">taskkill /f /im explorer.exe</div><div class="line">attrib <span class="_">-s</span> -r -h <span class="string">"%userprofile%\AppData\Local\iconcache.db"</span></div><div class="line">del <span class="string">"%userprofile%\AppData\Local\iconcache.db"</span> /f /q</div><div class="line">start explorer</div><div class="line">pause</div></pre></td></tr></table></figure></p>
+<p>然后再次以管理员身份运行即可。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -208,7 +113,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/bash/">bash</a><a href="/tags/配色/">配色</a>
+  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/windows/">windows</a><a href="/tags/快捷方式/">快捷方式</a>
   </div>
 
 </div>
@@ -217,7 +122,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/" data-title="ubuntu终端颜色配置 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/03/31/windows-删除快捷方式箭头/" data-title="windows 删除快捷方式箭头 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -231,18 +136,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/31/vi-颜色设置/" title="vi 颜色设置">
+ <a href="/2017/03/31/用rebase-i-修改提交/" title="用rebase -i 修改提交">
   <strong>上一篇：</strong><br/>
   <span>
-  vi 颜色设置</span>
+  用rebase -i 修改提交</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/"  title="VC6.0不能停止调试程序的解决方案">
+<a href="/2017/03/31/文件名过长，导致无法删除/"  title="文件名过长，导致无法删除">
  <strong>下一篇：</strong><br/> 
- <span>VC6.0不能停止调试程序的解决方案
+ <span>文件名过长，导致无法删除
 </span>
 </a>
 </div>

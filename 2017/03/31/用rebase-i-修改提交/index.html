@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>ubuntu终端颜色配置 | Liao&#39;s Blog</title>
+    <title>用rebase -i 修改提交 | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+    <meta name="description" content="如果commit的message填写错误，可以通过git的rebase来修改提交信息。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu终端颜色配置">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/index.html">
+<meta property="og:title" content="用rebase -i 修改提交">
+<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/用rebase-i-修改提交/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
-<meta property="og:updated_time" content="2017-03-31T09:12:28.357Z">
+<meta property="og:description" content="如果commit的message填写错误，可以通过git的rebase来修改提交信息。">
+<meta property="og:updated_time" content="2017-03-31T10:39:10.205Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu终端颜色配置">
-<meta name="twitter:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+<meta name="twitter:title" content="用rebase -i 修改提交">
+<meta name="twitter:description" content="如果commit的message填写错误，可以通过git的rebase来修改提交信息。">
 
     
     
@@ -82,119 +82,39 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/31/ubuntu终端颜色配置/" title="ubuntu终端颜色配置" itemprop="url">ubuntu终端颜色配置</a>
+      <a href="/2017/03/31/用rebase-i-修改提交/" title="用rebase -i 修改提交" itemprop="url">用rebase -i 修改提交</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-31T08:53:20.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+    <time datetime="2017-03-31T10:25:26.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。</p>
+		<p>如果commit的message填写错误，可以通过git的rebase来修改提交信息。</p>
 <a id="more"></a>
-<ol>
-<li><p>首先在终端里面用 gedit 打开配置文件（~/.bashrc），如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gedit ~/.bashrc</div></pre></td></tr></table></figure>
-</li>
-<li><p>在最后添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS1=<span class="string">'\[\033[1;31;40m\]\u@\h:\w\$\[\033[00m\] '</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>重启终端，你就可以看到你的配色了，或者执行 source .bashrc 命令也可以运行新的配色。</p>
-</li>
-</ol>
-<p><strong> 配色过程： </strong></p>
-<table>
-<thead>
-<tr>
-<th>前景</th>
-<th>背景</th>
-<th>颜色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>30</td>
-<td>40</td>
-<td>黑色</td>
-</tr>
-<tr>
-<td>31</td>
-<td>41</td>
-<td>紅色</td>
-</tr>
-<tr>
-<td>32</td>
-<td>42</td>
-<td>绿色</td>
-</tr>
-<tr>
-<td>33</td>
-<td>43</td>
-<td>黄色</td>
-</tr>
-<tr>
-<td>34</td>
-<td>44</td>
-<td>蓝色</td>
-</tr>
-<tr>
-<td>35</td>
-<td>45</td>
-<td>紫红色</td>
-</tr>
-<tr>
-<td>36</td>
-<td>46</td>
-<td>青蓝色</td>
-</tr>
-<tr>
-<td>37</td>
-<td>47</td>
-<td>白色</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>OFF</td>
-</tr>
-<tr>
-<td>1</td>
-<td>高亮显示</td>
-</tr>
-<tr>
-<td>4</td>
-<td>underline</td>
-</tr>
-<tr>
-<td>5</td>
-<td>闪烁</td>
-</tr>
-<tr>
-<td>7</td>
-<td>反白显示</td>
-</tr>
-<tr>
-<td>8</td>
-<td>不可见</td>
-</tr>
-</tbody>
-</table>
-<p>一个单独的颜色设置:<code>\033[代码;前景;背景m</code>，如：<code>\[\033[1;32;40m\]</code>表示高亮显示字体为绿色，背景色为黑色。</p>
-<p>注意：颜色的设置，放在相应的要设置的前面，如用户名颜色设置：<code>\[\033[01;35;40m\]\u</code></p>
+<p>用<code>rebase -i</code>，首先选择要修改的提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rebase -i HEAD~~</div></pre></td></tr></table></figure>
+<p>打开文本编辑器，将看到从<code>HEAD</code>到<code>HEAD~~</code>的提交如下图显示。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">pick 9a54fd4 添加commit的说明</div><div class="line">pick 0d4a808 添加pull的说明</div><div class="line"></div><div class="line"><span class="comment"># Rebase 326fc9f..0d4a808 onto d286baa</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Commands:</span></div><div class="line"><span class="comment">#  p, pick = use commit</span></div><div class="line"><span class="comment">#  r, reword = use commit, but edit the commit message</span></div><div class="line"><span class="comment">#  e, edit = use commit, but stop for amending</span></div><div class="line"><span class="comment">#  s, squash = use commit, but meld into previous commit</span></div><div class="line"><span class="comment">#  f, fixup = like "squash", but discard this commit's log message</span></div><div class="line"><span class="comment">#  x, exec = run command (the rest of the line) using shell</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span></div><div class="line"><span class="comment"># However, if you remove everything, the rebase will be aborted.</span></div><div class="line"><span class="comment">#</span></div></pre></td></tr></table></figure></p>
+<p>将第一行的<code>pick</code>改成<code>edit</code>，然后保存并退出。将会显示以下内容，修改过的提交呈现退出状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Stopped at d286baa... 添加commit的说明</div><div class="line">You can amend the commit now, with</div><div class="line"></div><div class="line">        git commit --amend</div><div class="line"></div><div class="line">Once you are satisfied with your changes, run</div><div class="line"></div><div class="line">        git rebase --continue</div></pre></td></tr></table></figure>
+<p>打开<code>sample.txt</code>，适当地修改<code>commit的讲解</code>部分。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">连猴子都懂的Git命令</div><div class="line">add 把变更录入到索引中</div><div class="line">commit 记录索引的状态</div><div class="line">pull 取得远端数据库的内容</div></pre></td></tr></table></figure>
+<p>用<code>commit --amend</code>保存修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git add sample.txt</div><div class="line">$ git commit --amend</div></pre></td></tr></table></figure>
+<p>现在已经<code>commit</code>，但是<code>rebase</code>操作还没结束。若要通知这个提交的操作已经结束，请指定 <code>--continue</code>选项执行<code>rebase</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rebase --continue</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这时，有可能其他提交会发生冲突, 请修改冲突部分后再执行add和rebase –continue。这时不需要提交。如果在中途要停止rebase操作，请在rebase指定–abort选项执行，这样就可以抹去并停止在rebase的操作。</p>
+</blockquote>
+<p>提交的修改完成了。如果要把多个提交修改成edit，下一个要修改的提交会退出，请执行同样的修改。</p>
+<blockquote>
+<p>实际上，在rebase之前的提交会以ORIG_HEAD之名存留。如果rebase之后无法复原到原先的状态，可以用git reset –hard ORIG_HEAD复原到rebase之前的状态。</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -208,7 +128,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/bash/">bash</a><a href="/tags/配色/">配色</a>
+  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/git/">git</a>
   </div>
 
 </div>
@@ -217,7 +137,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/" data-title="ubuntu终端颜色配置 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/03/31/用rebase-i-修改提交/" data-title="用rebase -i 修改提交 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -230,19 +150,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/31/vi-颜色设置/" title="vi 颜色设置">
-  <strong>上一篇：</strong><br/>
-  <span>
-  vi 颜色设置</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/"  title="VC6.0不能停止调试程序的解决方案">
+<a href="/2017/03/31/windows-删除快捷方式箭头/"  title="windows 删除快捷方式箭头">
  <strong>下一篇：</strong><br/> 
- <span>VC6.0不能停止调试程序的解决方案
+ <span>windows 删除快捷方式箭头
 </span>
 </a>
 </div>
