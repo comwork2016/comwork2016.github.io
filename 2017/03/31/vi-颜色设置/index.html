@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>ubuntu终端颜色配置 | Liao&#39;s Blog</title>
+    <title>vi 颜色设置 | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+    <meta name="description" content="编辑`~./vimrc文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu终端颜色配置">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/index.html">
+<meta property="og:title" content="vi 颜色设置">
+<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/vi-颜色设置/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
-<meta property="og:updated_time" content="2017-03-31T09:12:28.357Z">
+<meta property="og:description" content="编辑`~./vimrc文件">
+<meta property="og:updated_time" content="2017-03-31T09:20:41.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu终端颜色配置">
-<meta name="twitter:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+<meta name="twitter:title" content="vi 颜色设置">
+<meta name="twitter:description" content="编辑`~./vimrc文件">
 
     
     
@@ -82,133 +82,31 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/31/ubuntu终端颜色配置/" title="ubuntu终端颜色配置" itemprop="url">ubuntu终端颜色配置</a>
+      <a href="/2017/03/31/vi-颜色设置/" title="vi 颜色设置" itemprop="url">vi 颜色设置</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-31T08:53:20.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+    <time datetime="2017-03-31T09:18:12.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。</p>
+		<p>编辑`~./vimrc文件</p>
 <a id="more"></a>
-<ol>
-<li><p>首先在终端里面用 gedit 打开配置文件（~/.bashrc），如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gedit ~/.bashrc</div></pre></td></tr></table></figure>
-</li>
-<li><p>在最后添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS1=<span class="string">'\[\033[1;31;40m\]\u@\h:\w\$\[\033[00m\] '</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>重启终端，你就可以看到你的配色了，或者执行 source .bashrc 命令也可以运行新的配色。</p>
-</li>
-</ol>
-<p><strong> 配色过程： </strong></p>
-<table>
-<thead>
-<tr>
-<th>前景</th>
-<th>背景</th>
-<th>颜色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>30</td>
-<td>40</td>
-<td>黑色</td>
-</tr>
-<tr>
-<td>31</td>
-<td>41</td>
-<td>紅色</td>
-</tr>
-<tr>
-<td>32</td>
-<td>42</td>
-<td>绿色</td>
-</tr>
-<tr>
-<td>33</td>
-<td>43</td>
-<td>黄色</td>
-</tr>
-<tr>
-<td>34</td>
-<td>44</td>
-<td>蓝色</td>
-</tr>
-<tr>
-<td>35</td>
-<td>45</td>
-<td>紫红色</td>
-</tr>
-<tr>
-<td>36</td>
-<td>46</td>
-<td>青蓝色</td>
-</tr>
-<tr>
-<td>37</td>
-<td>47</td>
-<td>白色</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>代码</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>OFF</td>
-</tr>
-<tr>
-<td>1</td>
-<td>高亮显示</td>
-</tr>
-<tr>
-<td>4</td>
-<td>underline</td>
-</tr>
-<tr>
-<td>5</td>
-<td>闪烁</td>
-</tr>
-<tr>
-<td>7</td>
-<td>反白显示</td>
-</tr>
-<tr>
-<td>8</td>
-<td>不可见</td>
-</tr>
-</tbody>
-</table>
-<p>一个单独的颜色设置:<code>\033[代码;前景;背景m</code>，如：<code>\[\033[1;32;40m\]</code>表示高亮显示字体为绿色，背景色为黑色。</p>
-<p>注意：颜色的设置，放在相应的要设置的前面，如用户名颜色设置：<code>\[\033[01;35;40m\]\u</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> nocompatible <span class="string">" Use Vim defaults (much better!)  </span></div><div class="line">set bs=2  " allow backspacing over everything <span class="keyword">in</span> insert mode  </div><div class="line"><span class="built_in">set</span> ai   <span class="string">" always set autoindenting on  </span></div><div class="line">"<span class="built_in">set</span> backup  <span class="string">" keep a backup file  </span></div><div class="line">set viminfo='20,\"50 " <span class="built_in">read</span>/write a .viminfo file, don<span class="string">'t store more  </span></div><div class="line">   " than 50 lines of registers  </div><div class="line">set history=50  " keep 50 lines of command line history  </div><div class="line">set ruler  " show the cursor position all the time  </div><div class="line">  </div><div class="line">syntax on  </div><div class="line">set hlsearch  </div><div class="line">set incsearch  </div><div class="line">set tabstop=4  </div><div class="line">set autoindent  </div><div class="line">set cindent  </div><div class="line">set confirm  </div><div class="line">set number  </div><div class="line">set expandtab  </div><div class="line">set autoindent   </div><div class="line">set smartindent   </div><div class="line">filetype indent on   </div><div class="line">if v:lang =~ "utf8" || v:lang =~ "UTF-8"</div><div class="line">   set fileencodings=utf-8,latin1  </div><div class="line">endif  </div><div class="line">set syn=cpp  </div><div class="line">  </div><div class="line">" Only do this part when compiled with support for autocommands  </div><div class="line">if has("autocmd")  </div><div class="line">  " In text files, always limit the width of text to 78 characters  </div><div class="line">  autocmd BufRead *.txt set tw=78  </div><div class="line">  " When editing a file, always jump to the last cursor position  </div><div class="line">  autocmd BufReadPost *  </div><div class="line">  \ if line("'\<span class="string">""</span>) &gt; 0 &amp;&amp; line (<span class="string">"'\""</span>) &lt;= line(<span class="string">"&#123;1"</span>) |  </div><div class="line">  \   exe <span class="string">"normal! g'\""</span> |  </div><div class="line">  \ endif  </div><div class="line">endif  </div><div class="line">  </div><div class="line"><span class="keyword">if</span> has(<span class="string">"cscope"</span>)  </div><div class="line">   <span class="built_in">set</span> csprg=/usr/bin/cscope  </div><div class="line">   <span class="built_in">set</span> csto=0  </div><div class="line">   <span class="built_in">set</span> cst  </div><div class="line">   <span class="built_in">set</span> nocsverb  </div><div class="line">   <span class="string">" add any database in current directory  </span></div><div class="line">   if filereadable("cscope.out<span class="string">")  </span></div><div class="line">      cs add cscope.out  </div><div class="line">   " <span class="keyword">else</span> add database pointed to by environment  </div><div class="line">   elseif <span class="variable">$CSCOPE_DB</span> != <span class="string">""</span>  </div><div class="line">      cs add <span class="variable">$CSCOPE_DB</span>  </div><div class="line">   endif  </div><div class="line">   <span class="built_in">set</span> csverb  </div><div class="line">endif  </div><div class="line">  </div><div class="line"><span class="string">" Switch syntax highlighting on, when the terminal has colors  </span></div><div class="line">" Also switch on highlighting the last used search pattern.  </div><div class="line">  syntax on  </div><div class="line">  <span class="built_in">set</span> hlsearch  </div><div class="line">  </div><div class="line"><span class="keyword">if</span> &amp;term==<span class="string">"xterm"</span>  </div><div class="line">     <span class="built_in">set</span> t_Co=8  </div><div class="line">     <span class="built_in">set</span> t_Sb=m  </div><div class="line">     <span class="built_in">set</span> t_Sf=m  </div><div class="line">endif  </div><div class="line"><span class="built_in">set</span> tags=tags  </div><div class="line">se cursorline  </div><div class="line">se cursorcolumn  </div><div class="line">hi cursorline   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white   </div><div class="line">hi cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white</div></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/tools/">tools</a>
-</div>
-
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/bash/">bash</a><a href="/tags/配色/">配色</a>
+  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/配色/">配色</a><a href="/tags/vi/">vi</a>
   </div>
 
 </div>
@@ -217,7 +115,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/" data-title="ubuntu终端颜色配置 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/03/31/vi-颜色设置/" data-title="vi 颜色设置 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -230,19 +128,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/31/vi-颜色设置/" title="vi 颜色设置">
-  <strong>上一篇：</strong><br/>
-  <span>
-  vi 颜色设置</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/"  title="VC6.0不能停止调试程序的解决方案">
+<a href="/2017/03/31/ubuntu终端颜色配置/"  title="ubuntu终端颜色配置">
  <strong>下一篇：</strong><br/> 
- <span>VC6.0不能停止调试程序的解决方案
+ <span>ubuntu终端颜色配置
 </span>
 </a>
 </div>
