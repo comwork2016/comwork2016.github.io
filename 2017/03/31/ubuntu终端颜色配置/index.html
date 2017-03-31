@@ -4,29 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>intellij idea 注册服务器 | Liao&#39;s Blog</title>
+    <title>ubuntu终端颜色配置 | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="Intellij idea 注册服务器地址
-lisense server address: http://www.iteblog.com/idea/key.php
-服务器更新地址:http://idea.lanyus.com/">
+    <meta name="description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="intellij idea 注册服务器">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/intellij-idea-注册服务器/index.html">
+<meta property="og:title" content="ubuntu终端颜色配置">
+<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="Intellij idea 注册服务器地址
-lisense server address: http://www.iteblog.com/idea/key.php
-服务器更新地址:http://idea.lanyus.com/">
-<meta property="og:updated_time" content="2017-03-31T08:35:44.328Z">
+<meta property="og:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
+<meta property="og:updated_time" content="2017-03-31T09:10:23.414Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="intellij idea 注册服务器">
-<meta name="twitter:description" content="Intellij idea 注册服务器地址
-lisense server address: http://www.iteblog.com/idea/key.php
-服务器更新地址:http://idea.lanyus.com/">
+<meta name="twitter:title" content="ubuntu终端颜色配置">
+<meta name="twitter:description" content="打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。">
 
     
     
@@ -88,22 +82,119 @@ lisense server address: http://www.iteblog.com/idea/key.php
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/31/intellij-idea-注册服务器/" title="intellij idea 注册服务器" itemprop="url">intellij idea 注册服务器</a>
+      <a href="/2017/03/31/ubuntu终端颜色配置/" title="ubuntu终端颜色配置" itemprop="url">ubuntu终端颜色配置</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-31T08:32:32.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+    <time datetime="2017-03-31T08:53:20.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>Intellij idea 注册服务器地址</p>
-<p>lisense server address: <a href="http://www.iteblog.com/idea/key.php" target="_blank" rel="external">http://www.iteblog.com/idea/key.php</a></p>
-<p>服务器更新地址:<a href="http://idea.lanyus.com/" target="_blank" rel="external">http://idea.lanyus.com/</a></p>
+		<p>打开终端（ctrl+alt+T），会发现里面都是一个颜色，不管是用户名、主机名还是命令都是白色，对开发人员来说带来了不便之处。因为有时候你需要去几十行甚至上百行代码里面去找一些你运行过的命令或你想要的信息。</p>
+<a id="more"></a>
+<ol>
+<li><p>首先在终端里面用 gedit 打开配置文件（~/.bashrc），如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gedit ~/.bashrc</div></pre></td></tr></table></figure>
+</li>
+<li><p>在最后添加如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS1=<span class="string">'\[\033[1;31;40m\]\u@\h:\w\$\[\033[00m\] '</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>重启终端，你就可以看到你的配色了，或者执行 source .bashrc 命令也可以运行新的配色。</p>
+</li>
+</ol>
+<p><strong> 配色过程： </strong></p>
+<table>
+<thead>
+<tr>
+<th>前景</th>
+<th>背景</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>40</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td>31</td>
+<td>41</td>
+<td>紅色</td>
+</tr>
+<tr>
+<td>32</td>
+<td>42</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td>33</td>
+<td>43</td>
+<td>黄色</td>
+</tr>
+<tr>
+<td>34</td>
+<td>44</td>
+<td>蓝色</td>
+</tr>
+<tr>
+<td>35</td>
+<td>45</td>
+<td>紫红色</td>
+</tr>
+<tr>
+<td>36</td>
+<td>46</td>
+<td>青蓝色</td>
+</tr>
+<tr>
+<td>37</td>
+<td>47</td>
+<td>白色</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>OFF</td>
+</tr>
+<tr>
+<td>1</td>
+<td>高亮显示</td>
+</tr>
+<tr>
+<td>4</td>
+<td>underline</td>
+</tr>
+<tr>
+<td>5</td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td>7</td>
+<td>反白显示</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不可见</td>
+</tr>
+</tbody>
+</table>
+<p>一个单独的颜色设置:<code>\033[代码;前景;背景m</code>，如：<code>\[\033[1;32;40m\]</code>表示高亮显示字体为绿色，背景色为黑色。</p>
+<p>注意：颜色的设置，放在相应的要设置的前面，如用户名颜色设置：<code>\[\033[01;35;40m\]\u</code></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -117,7 +208,7 @@ lisense server address: http://www.iteblog.com/idea/key.php
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/idea/">idea</a><a href="/tags/license/">license</a>
+  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/vi/">vi</a><a href="/tags/配色/">配色</a>
   </div>
 
 </div>
@@ -126,7 +217,7 @@ lisense server address: http://www.iteblog.com/idea/key.php
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/intellij-idea-注册服务器/" data-title="intellij idea 注册服务器 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/03/31/ubuntu终端颜色配置/" data-title="ubuntu终端颜色配置 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,19 +230,11 @@ lisense server address: http://www.iteblog.com/idea/key.php
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/" title="VC6.0不能停止调试程序的解决方案">
-  <strong>上一篇：</strong><br/>
-  <span>
-  VC6.0不能停止调试程序的解决方案</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/31/Python-split保留分隔符/"  title="Python split保留分隔符">
+<a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/"  title="VC6.0不能停止调试程序的解决方案">
  <strong>下一篇：</strong><br/> 
- <span>Python split保留分隔符
+ <span>VC6.0不能停止调试程序的解决方案
 </span>
 </a>
 </div>
