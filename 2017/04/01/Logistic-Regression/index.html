@@ -19,7 +19,7 @@
 <meta property="og:description" content="本文主要参考Andrew Ng老师的Machine Learning公开课，并用《机器学习实战》中的源码实现。">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/ML/LR/lr-distribution.png">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/ML/LR/lr-classify-data.png">
-<meta property="og:updated_time" content="2017-04-01T08:57:25.226Z">
+<meta property="og:updated_time" content="2017-04-01T09:19:25.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
 <meta name="twitter:description" content="本文主要参考Andrew Ng老师的Machine Learning公开课，并用《机器学习实战》中的源码实现。">
@@ -101,7 +101,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
 		
 		</div>
 		
@@ -150,6 +150,13 @@
 <p>$$\begin{eqnarray}<br>\theta_j &amp;=&amp; \theta_j + \alpha \sum_{i=1}^{m}(-e^{(i)})x_j^{(i)}\\<br>&amp;=&amp; \theta_j-\alpha\cdot(x_j^{(1)},x_j^{(2)},\ldots,x_j^{(m)})\cdot E<br>\end{eqnarray}$$</p>
 <p>综合上面的式子有：</p>
 <p>$$\begin{equation}<br>\theta = \theta - \alpha\cdot\frac{1}{m}\cdot x^T\cdot(g(x\cdot\theta)-y)<br>\end{equation}$$</p>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><p>由于模型的参数个数一般是由人为指定和调节的，所以正则化常常是用来限制模型参数值不要过大，也被称为惩罚项。一般是在目标函数(经验风险)中加上一个正则化项$ \Phi(w) $即</p>
+<p>$$\begin{equation}<br>J(w) = -\frac{1}{m}[\sum_{i=1}^{m}y_ilog h_w (x_i) + (1-y_i)log(1-h_w(x_i))] + \lambda \Phi(w)<br>\label{eq:reg}<br>\end{equation}$$</p>
+<p>而这个正则化项一般会采用L1范数或者L2范数。其形式分别为$ \Phi (w)=||x||_1 $和$ \Phi (w)=||x||_2 $。</p>
+<p>首先针对L1范数$ \Phi (w)=|x| $，当采用梯度下降方式来优化目标函数时，对目标函数进行求导，正则化项导致的梯度变化当$ w_j &gt; 0 $是取1，当$ w_j &lt; 0 $时取-1.</p>
+<p>从而导致的参数$w_j$减去了学习率与公式的乘积，因此当$ w_j &gt; 0 $的时候，$ w_j$会减去一个正数，导致$ w_j $减小，而当$ w_j &lt; 0 $的时候，$ w_j$会减去一个负数，导致$ w_j$又变大，因此这个正则项会导致参数$ w_j$取值趋近于0，也就是为什么L1正则能够使权重稀疏，这样参数值就受到控制会趋近于0。L1正则还被称为 Lasso regularization。</p>
+<p>然后针对L2范数$\phi(w) = \sum_{j=1}^{n}w_j^2$，同样对它求导，得到梯度变化为$\frac{\partial \Phi(w)}{\partial w_j} = 2w_j$(一般会用$\frac{\lambda}{2}$来把这个系数2给消掉)。同样的更新之后使得$ w_j$的值不会变得特别大。在机器学习中也将L2正则称为weight decay，在回归问题中，关于L2正则的回归还被称为Ridge Regression岭回归。weight decay还有一个好处，它使得目标函数变为凸函数，梯度下降法和L-BFGS都能收敛到全局最优解。</p>
+<p><strong>需要注意的是</strong>，L1正则化会导致参数值变为0，但是L2却只会使得参数值减小，这是因为L1的导数是固定的，参数值每次的改变量是固定的，而L2会由于自己变小改变量也变小。而公式$\eqref{eq:reg}$中的$\lambda$也有着很重要的作用，它在权衡拟合能力和泛化能力对整个模型的影响，$\lambda$越大，对参数值惩罚越大，泛化能力越好。</p>
 <!--
 
 
@@ -176,8 +183,6 @@ $$
 此方法中也需要一个阈值$ \epsilon $，当$ ||gk||<\epsilon $时停止迭代。此外，这个方法需要目标函数是二阶连续可微的，本文中的$ J(w) $是符合要求的。
 
 ## BFGS
-
-# 正则化
 
 # 逻辑回归与其他模型的关系
 
@@ -256,7 +261,7 @@ MathJax.Hub.Config({
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
  
   </div>
 
