@@ -19,7 +19,7 @@
 <meta property="og:description" content="本文主要参考Andrew Ng老师的Machine Learning公开课，并用《机器学习实战》中的源码实现。">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/ML/LR/lr-distribution.png">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/ML/LR/lr-classify-data.png">
-<meta property="og:updated_time" content="2017-04-01T08:11:18.654Z">
+<meta property="og:updated_time" content="2017-04-01T08:57:25.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
 <meta name="twitter:description" content="本文主要参考Andrew Ng老师的Machine Learning公开课，并用《机器学习实战》中的源码实现。">
@@ -101,7 +101,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#牛顿法"><span class="toc-number">2.2.</span> <span class="toc-text">牛顿法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFGS"><span class="toc-number">2.3.</span> <span class="toc-text">BFGS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑回归与其他模型的关系"><span class="toc-number">4.</span> <span class="toc-text">逻辑回归与其他模型的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与线性回归"><span class="toc-number">4.1.</span> <span class="toc-text">逻辑回归与线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与最大熵"><span class="toc-number">4.2.</span> <span class="toc-text">逻辑回归与最大熵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与svm"><span class="toc-number">4.3.</span> <span class="toc-text">逻辑回归与svm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与朴素贝叶斯"><span class="toc-number">4.4.</span> <span class="toc-text">逻辑回归与朴素贝叶斯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与能量模型"><span class="toc-number">4.5.</span> <span class="toc-text">逻辑回归与能量模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#《机器学习实战》代码"><span class="toc-number">5.</span> <span class="toc-text">《机器学习实战》代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">5.1.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
 		
 		</div>
 		
@@ -137,14 +137,64 @@
 <blockquote>
 <p>如果采用梯度上升法来推到参数的更新方式，会发现式子与公式$\eqref{eq:lr-gd}$完全一样，所以采用梯度上升发和梯度下降法是一样的。</p>
 </blockquote>
-<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><p>先把$ J(w) $对$ w_j $的二阶偏导求出来，且用$ H $表示。$ H $是海森矩阵。</p>
-<p>$$\begin{equation}<br>H_{mn} = \frac {\partial^2 J(w)} {\partial w_m \partial w_n} =h_w(x^{(i)})(1-h_w(x^{(i)}))x^{(i)}_mx^{(i)}_n<br>\end{equation}$$</p>
-<p><a href="http://blog.csdn.net/itplus/article/details/21896453" target="_blank" rel="external">牛顿法</a>的基本思路是，<strong>在现有极小点估计值的附近对$f(x)$做二阶泰勒展开，进而找到极小点的下一个估计值</strong>。假设$ w^k $为当前的极小值估计值，那么有</p>
-<p>$$<br>\varphi (w) = J(w^k) + J’(w^k)(w-w^k)+\frac{1}{2}J’’(w^k)(w-w^k)^2<br>$$</p>
-<p>然后令$ \varphi’(w)=0 $得到了$ w=w^k-\frac{J’(w^k)}{J’’(w^k)} $因此有迭代更新式，</p>
-<p>$$<br>w^{k+1} = w^k - \frac{J’(w^k)}{J’’(w^k)} = w^k - H_k^{-1}\cdot g_k<br>$$</p>
-<p>此方法中也需要一个阈值$ \epsilon $，当$ ||gk||&lt;\epsilon $时停止迭代。此外，这个方法需要目标函数是二阶连续可微的，本文中的$ J(w) $是符合要求的。</p>
-<h2 id="BFGS"><a href="#BFGS" class="headerlink" title="BFGS"></a>BFGS</h2><h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><h1 id="逻辑回归与其他模型的关系"><a href="#逻辑回归与其他模型的关系" class="headerlink" title="逻辑回归与其他模型的关系"></a>逻辑回归与其他模型的关系</h1><h2 id="逻辑回归与线性回归"><a href="#逻辑回归与线性回归" class="headerlink" title="逻辑回归与线性回归"></a>逻辑回归与线性回归</h2><h2 id="逻辑回归与最大熵"><a href="#逻辑回归与最大熵" class="headerlink" title="逻辑回归与最大熵"></a>逻辑回归与最大熵</h2><h2 id="逻辑回归与svm"><a href="#逻辑回归与svm" class="headerlink" title="逻辑回归与svm"></a>逻辑回归与svm</h2><h2 id="逻辑回归与朴素贝叶斯"><a href="#逻辑回归与朴素贝叶斯" class="headerlink" title="逻辑回归与朴素贝叶斯"></a>逻辑回归与朴素贝叶斯</h2><h2 id="逻辑回归与能量模型"><a href="#逻辑回归与能量模型" class="headerlink" title="逻辑回归与能量模型"></a>逻辑回归与能量模型</h2><h1 id="《机器学习实战》代码"><a href="#《机器学习实战》代码" class="headerlink" title="《机器学习实战》代码"></a>《机器学习实战》代码</h1><h2 id="梯度下降过程向量化"><a href="#梯度下降过程向量化" class="headerlink" title="梯度下降过程向量化"></a>梯度下降过程向量化</h2><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
+<h2 id="梯度下降过程向量化"><a href="#梯度下降过程向量化" class="headerlink" title="梯度下降过程向量化"></a>梯度下降过程向量化</h2><p>约定训练数据的矩阵形式如下，$ x $的每一行为一条训练样本，而每一列为不同的特称取值：</p>
+<p>$$\begin{equation}<br>x=<br>\left[<br>\begin{matrix}<br>x^{(1)}\\<br>x^{(2)}\\<br>\ldots\\<br>x^{(m)}<br>\end{matrix}<br>\right]<br>=<br>\left[<br>\begin{matrix}<br>x_0^{(1)} &amp; x_1^{(1)} &amp; \ldots &amp; x_n^{(1)}\\<br>x_0^{(2)} &amp; x_1^{(2)} &amp; \ldots &amp; x_n^{(2)}\\<br>\ldots &amp; \ldots &amp; \ldots &amp; \ldots \\<br>x_0^{(m)} &amp; x_1^{(m)} &amp; \ldots &amp; x_n^{(m)}<br>\end{matrix}<br>\right]<br>,<br>y=<br>\left[<br>\begin{matrix}<br>y^{(1)}\\<br>y^{(2)}\\<br>\ldots\\<br>y^{(m)}<br>\end{matrix}<br>\right]<br>\end{equation}$$</p>
+<p>约定待求的参数θ的矩阵形式为：</p>
+<p>$$\begin{equation}<br>\theta =<br>\left[<br>\begin{matrix}<br>\theta_1\\<br>\theta_2\\<br>\ldots\\<br>\theta_n<br>\end{matrix}<br>\right]<br>\end{equation}$$</p>
+<p>先求$ x \cdot \theta $并记为$ A $：</p>
+<p>$$\begin{equation}<br>A=x \cdot \theta<br>=<br>\left[<br>\begin{matrix}<br>x_0^{(1)} &amp; x_1^{(1)} &amp; \ldots &amp; x_n^{(1)}\\<br>x_0^{(2)} &amp; x_1^{(2)} &amp; \ldots &amp; x_n^{(2)}\\<br>\ldots &amp; \ldots &amp; \ldots &amp; \ldots \\<br>x_0^{(m)} &amp; x_1^{(m)} &amp; \ldots &amp; x_n^{(m)}<br>\end{matrix}<br>\right]<br>\cdot<br>\left[<br>\begin{matrix}<br>\theta_0\\<br>\theta_1\\<br>\ldots\\<br>\theta_n<br>\end{matrix}<br>\right]<br>=<br>\left[<br>\begin{matrix}<br>\theta_0x_0^{(1)} + \theta_1x_1^{(1)} + \ldots + \theta_nx_n^{(1)}\\<br>\theta_0x_0^{(2)} + \theta_1x_1^{(2)} + \ldots + \theta_nx_n^{(2)}\\<br>\ldots \\<br>\theta_0x_0^{(m)} + \theta_1x_1^{(m)} + \ldots + \theta_nx_n^{(m)}<br>\end{matrix}<br>\right]<br>\end{equation}$$</p>
+<p>求$ h_\theta(x)-y $并记为$ E $：</p>
+<p>$$\begin{equation}<br>E=h_\theta(x)-y=<br>\left[<br>\begin{matrix}<br>g(A^{(1)})-y^{(1)}\\<br>g(A^{(2)})-y^{(2)}\\<br>\ldots \\<br>g(A^{(m)})-y^{(m)}<br>\end{matrix}<br>\right]<br>=<br>\left[<br>\begin{matrix}<br>e^{(1)}\\<br>e^{(2)}\\<br>\ldots\\<br>e^{(m)}<br>\end{matrix}<br>\right]<br>=g(A)-y<br>\end{equation}$$</p>
+<p>由上式可知$ h_\theta(x)-y $可以由$ g(A)-y $一次计算求得。</p>
+<p>再来看一下公式$\eqref{eq:lr-gd}$的$\theta$更新过程：</p>
+<p>$$\begin{eqnarray}<br>\theta_j &amp;=&amp; \theta_j + \alpha \sum_{i=1}^{m}(-e^{(i)})x_j^{(i)}\\<br>&amp;=&amp; \theta_j-\alpha\cdot(x_j^{(1)},x_j^{(2)},\ldots,x_j^{(m)})\cdot E<br>\end{eqnarray}$$</p>
+<p>综合上面的式子有：</p>
+<p>$$\begin{equation}<br>\theta = \theta - \alpha\cdot\frac{1}{m}\cdot x^T\cdot(g(x\cdot\theta)-y)<br>\end{equation}$$</p>
+<!--
+
+
+## 牛顿法
+
+先把$ J(w) $对$ w_j $的二阶偏导求出来，且用$ H $表示。$ H $是海森矩阵。
+
+$$\begin{equation}
+H_{mn} = \frac {\partial^2 J(w)} {\partial w_m \partial w_n} =h_w(x^{(i)})(1-h_w(x^{(i)}))x^{(i)}_mx^{(i)}_n
+\end{equation}$$
+
+[牛顿法](http://blog.csdn.net/itplus/article/details/21896453)的基本思路是，**在现有极小点估计值的附近对$f(x)$做二阶泰勒展开，进而找到极小点的下一个估计值**。假设$ w^k $为当前的极小值估计值，那么有
+
+$$
+\varphi (w) = J(w^k) + J’(w^k)(w-w^k)+\frac{1}{2}J’’(w^k)(w-w^k)^2
+$$
+
+然后令$ \varphi’(w)=0 $得到了$ w=w^k-\frac{J’(w^k)}{J’’(w^k)} $因此有迭代更新式，
+
+$$
+w^{k+1} = w^k - \frac{J’(w^k)}{J’’(w^k)} = w^k - H_k^{-1}\cdot g_k
+$$
+
+此方法中也需要一个阈值$ \epsilon $，当$ ||gk||<\epsilon $时停止迭代。此外，这个方法需要目标函数是二阶连续可微的，本文中的$ J(w) $是符合要求的。
+
+## BFGS
+
+# 正则化
+
+# 逻辑回归与其他模型的关系
+
+## 逻辑回归与线性回归
+
+## 逻辑回归与最大熵
+
+## 逻辑回归与svm
+
+## 逻辑回归与朴素贝叶斯
+
+## 逻辑回归与能量模型
+
+# 《机器学习实战》代码
+
+-->
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
 <p><a href="http://blog.csdn.net/dongtingzhizi/article/details/15962797" target="_blank" rel="external">【机器学习笔记1】Logistic回归总结</a><br><a href="https://chenrudan.github.io/blog/2016/01/09/logisticregression.html" target="_blank" rel="external">【机器学习算法系列之二】浅析Logistic Regression</a><br><a href="http://blog.csdn.net/itplus/article/details/21896453" target="_blank" rel="external">牛顿法与拟牛顿法学习笔记（一）牛顿法</a></p>
 </blockquote>
 <script type="text/x-mathjax-config">
@@ -206,7 +256,7 @@ MathJax.Hub.Config({
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#牛顿法"><span class="toc-number">2.2.</span> <span class="toc-text">牛顿法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BFGS"><span class="toc-number">2.3.</span> <span class="toc-text">BFGS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑回归与其他模型的关系"><span class="toc-number">4.</span> <span class="toc-text">逻辑回归与其他模型的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与线性回归"><span class="toc-number">4.1.</span> <span class="toc-text">逻辑回归与线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与最大熵"><span class="toc-number">4.2.</span> <span class="toc-text">逻辑回归与最大熵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与svm"><span class="toc-number">4.3.</span> <span class="toc-text">逻辑回归与svm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与朴素贝叶斯"><span class="toc-number">4.4.</span> <span class="toc-text">逻辑回归与朴素贝叶斯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑回归与能量模型"><span class="toc-number">4.5.</span> <span class="toc-text">逻辑回归与能量模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#《机器学习实战》代码"><span class="toc-number">5.</span> <span class="toc-text">《机器学习实战》代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">5.1.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Logistic-Regression基本原理"><span class="toc-number">1.</span> <span class="toc-text">Logistic Regression基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic分布"><span class="toc-number">1.1.</span> <span class="toc-text">Logistic分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二项Logistic-Regression模型"><span class="toc-number">1.2.</span> <span class="toc-text">二项Logistic Regression模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#优化方法"><span class="toc-number">2.</span> <span class="toc-text">优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降法"><span class="toc-number">2.1.</span> <span class="toc-text">梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度下降过程向量化"><span class="toc-number">2.2.</span> <span class="toc-text">梯度下降过程向量化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
  
   </div>
 
