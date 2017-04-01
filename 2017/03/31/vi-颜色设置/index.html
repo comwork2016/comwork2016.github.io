@@ -11,16 +11,16 @@
     
 
     
-    <meta name="description" content="编辑`~./vimrc文件">
+    <meta name="description" content="编辑~./vimrc文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vi 颜色设置">
 <meta property="og:url" content="https://comwork2016.github.io/2017/03/31/vi-颜色设置/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="编辑`~./vimrc文件">
-<meta property="og:updated_time" content="2017-03-31T10:54:20.924Z">
+<meta property="og:description" content="编辑~./vimrc文件">
+<meta property="og:updated_time" content="2017-04-01T01:58:19.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vi 颜色设置">
-<meta name="twitter:description" content="编辑`~./vimrc文件">
+<meta name="twitter:description" content="编辑~./vimrc文件">
 
     
     
@@ -95,7 +95,7 @@
 </header>
 	<div class="article-content">
 		
-		<p>编辑`~./vimrc文件</p>
+		<p>编辑<code>~./vimrc</code>文件</p>
 <a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> nocompatible <span class="string">" Use Vim defaults (much better!)  </span></div><div class="line">set bs=2  " allow backspacing over everything <span class="keyword">in</span> insert mode  </div><div class="line"><span class="built_in">set</span> ai   <span class="string">" always set autoindenting on  </span></div><div class="line">"<span class="built_in">set</span> backup  <span class="string">" keep a backup file  </span></div><div class="line">set viminfo='20,\"50 " <span class="built_in">read</span>/write a .viminfo file, don<span class="string">'t store more  </span></div><div class="line">   " than 50 lines of registers  </div><div class="line">set history=50  " keep 50 lines of command line history  </div><div class="line">set ruler  " show the cursor position all the time  </div><div class="line">  </div><div class="line">syntax on  </div><div class="line">set hlsearch  </div><div class="line">set incsearch  </div><div class="line">set tabstop=4  </div><div class="line">set autoindent  </div><div class="line">set cindent  </div><div class="line">set confirm  </div><div class="line">set number  </div><div class="line">set expandtab  </div><div class="line">set autoindent   </div><div class="line">set smartindent   </div><div class="line">filetype indent on   </div><div class="line">if v:lang =~ "utf8" || v:lang =~ "UTF-8"</div><div class="line">   set fileencodings=utf-8,latin1  </div><div class="line">endif  </div><div class="line">set syn=cpp  </div><div class="line">  </div><div class="line">" Only do this part when compiled with support for autocommands  </div><div class="line">if has("autocmd")  </div><div class="line">  " In text files, always limit the width of text to 78 characters  </div><div class="line">  autocmd BufRead *.txt set tw=78  </div><div class="line">  " When editing a file, always jump to the last cursor position  </div><div class="line">  autocmd BufReadPost *  </div><div class="line">  \ if line("'\<span class="string">""</span>) &gt; 0 &amp;&amp; line (<span class="string">"'\""</span>) &lt;= line(<span class="string">"&#123;1"</span>) |  </div><div class="line">  \   exe <span class="string">"normal! g'\""</span> |  </div><div class="line">  \ endif  </div><div class="line">endif  </div><div class="line">  </div><div class="line"><span class="keyword">if</span> has(<span class="string">"cscope"</span>)  </div><div class="line">   <span class="built_in">set</span> csprg=/usr/bin/cscope  </div><div class="line">   <span class="built_in">set</span> csto=0  </div><div class="line">   <span class="built_in">set</span> cst  </div><div class="line">   <span class="built_in">set</span> nocsverb  </div><div class="line">   <span class="string">" add any database in current directory  </span></div><div class="line">   if filereadable("cscope.out<span class="string">")  </span></div><div class="line">      cs add cscope.out  </div><div class="line">   " <span class="keyword">else</span> add database pointed to by environment  </div><div class="line">   elseif <span class="variable">$CSCOPE_DB</span> != <span class="string">""</span>  </div><div class="line">      cs add <span class="variable">$CSCOPE_DB</span>  </div><div class="line">   endif  </div><div class="line">   <span class="built_in">set</span> csverb  </div><div class="line">endif  </div><div class="line">  </div><div class="line"><span class="string">" Switch syntax highlighting on, when the terminal has colors  </span></div><div class="line">" Also switch on highlighting the last used search pattern.  </div><div class="line">  syntax on  </div><div class="line">  <span class="built_in">set</span> hlsearch  </div><div class="line">  </div><div class="line"><span class="keyword">if</span> &amp;term==<span class="string">"xterm"</span>  </div><div class="line">     <span class="built_in">set</span> t_Co=8  </div><div class="line">     <span class="built_in">set</span> t_Sb=m  </div><div class="line">     <span class="built_in">set</span> t_Sf=m  </div><div class="line">endif  </div><div class="line"><span class="built_in">set</span> tags=tags  </div><div class="line">se cursorline  </div><div class="line">se cursorcolumn  </div><div class="line">hi cursorline   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white   </div><div class="line">hi cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white</div></pre></td></tr></table></figure>
   
@@ -111,7 +111,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/vi/">vi</a><a href="/tags/配色/">配色</a>
+  <span></span> <a href="/tags/tools/">tools</a><a href="/tags/配色/">配色</a><a href="/tags/vi/">vi</a>
   </div>
 
 </div>
@@ -177,11 +177,19 @@
 		<ul>
 		
 		  
+			<li><a href="/categories/ML/" title="ML">ML<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>2</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/python/" title="python">python<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/tools/" title="tools">tools<sup>9</sup></a></li>
+			<li><a href="/categories/tools/" title="tools">tools<sup>8</sup></a></li>
 		  
 		
 		</ul>
@@ -194,15 +202,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/tools/" title="tools">tools<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/配色/" title="配色">配色<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/windows/" title="windows">windows<sup>2</sup></a></li>
+				<li><a href="/tags/tools/" title="tools">tools<sup>4</sup></a></li>
 			
 		
 			
@@ -210,47 +210,15 @@
 			
 		
 			
+				<li><a href="/tags/windows/" title="windows">windows<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/ignore/" title="ignore">ignore<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/vi/" title="vi">vi<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/日志/" title="日志">日志<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/bash/" title="bash">bash<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/vc6-0/" title="vc6.0">vc6.0<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/license/" title="license">license<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/split/" title="split">split<sup>1</sup></a></li>
+				<li><a href="/tags/配色/" title="配色">配色<sup>2</sup></a></li>
 			
 		
 			
@@ -258,7 +226,59 @@
 			
 		
 			
+				<li><a href="/tags/bash/" title="bash">bash<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/idea/" title="idea">idea<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/license/" title="license">license<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vi/" title="vi">vi<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/split/" title="split">split<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ignore/" title="ignore">ignore<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vc6-0/" title="vc6.0">vc6.0<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/日志/" title="日志">日志<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/快捷方式/" title="快捷方式">快捷方式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/math/" title="math">math<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/latex/" title="latex">latex<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ML/" title="ML">ML<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/LR/" title="LR">LR<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 			
 		
 		</ul>
