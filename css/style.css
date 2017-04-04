@@ -1371,7 +1371,6 @@ footer.article-footer {
   float: left;
   padding: 0 0.3em;
   margin: 0.3em;
-  background: #e6e6e6;
 }
 .article-tags a:hover {
   color: #fff;
@@ -1409,7 +1408,7 @@ footer.article-footer {
   font-weight: bold;
 }
 .article-nav a {
-  display: block;
+  display: inline-block;
   overflow: hidden;
 }
 .article-nav .prev a:hover,
@@ -1686,7 +1685,6 @@ section.comment {
   display: block;
   margin: 0.3125em;
   padding: 0.125em 0.3125em;
-  background: #dbdbdb;
 }
 .tagslist ul li a:hover {
   color: #1f1f1f;
