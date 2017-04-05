@@ -453,7 +453,7 @@ body >header a {
   width: 86%;
   font-family: "Verdana", "微软雅黑";
   font-size: 200%;
-  line-height: 2;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -470,6 +470,7 @@ body >header a {
 #textlogo h2.blog-motto {
   font-size: 0.7em;
   font-weight: normal;
+  line-height: 1.5;
 }
 @media only screen and (min-width: 768px) {
   #textlogo h2.blog-motto {
