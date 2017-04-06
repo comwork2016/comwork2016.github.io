@@ -4,24 +4,31 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Python日志模块 | Liao&#39;s Blog</title>
+    <title>奇异值分解 SVD | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="python的标准库里的日志系统从Python2.3开始支持。只要import logging这个模块即可使用。">
-<meta name="keywords" content="python,日志">
+    <meta name="description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
+<meta name="keywords" content="ML,SVD,math">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python日志模块">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/Python日志模块/index.html">
+<meta property="og:title" content="奇异值分解 SVD">
+<meta property="og:url" content="https://comwork2016.github.io/2017/04/06/奇异值分解-SVD/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="python的标准库里的日志系统从Python2.3开始支持。只要import logging这个模块即可使用。">
-<meta property="og:updated_time" content="2017-04-01T11:56:30.614Z">
+<meta property="og:description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd1.png">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd2.png">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd3.png">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example1.png">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example2.png">
+<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example3.png">
+<meta property="og:updated_time" content="2017-04-06T01:30:48.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python日志模块">
-<meta name="twitter:description" content="python的标准库里的日志系统从Python2.3开始支持。只要import logging这个模块即可使用。">
+<meta name="twitter:title" content="奇异值分解 SVD">
+<meta name="twitter:description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
+<meta name="twitter:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd1.png">
 
     
     
@@ -83,14 +90,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/31/Python日志模块/" title="Python日志模块" itemprop="url">Python日志模块</a>
+      <a href="/2017/04/06/奇异值分解-SVD/" title="奇异值分解 SVD" itemprop="url">奇异值分解 SVD</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-31T07:26:28.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+    <time datetime="2017-04-06T00:56:22.000Z" itemprop="datePublished"> 发表于 2017-04-06</time>
     
   </p>
 </header>
@@ -99,76 +106,81 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#日志级别"><span class="toc-number">1.</span> <span class="toc-text">日志级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关键概念"><span class="toc-number">2.</span> <span class="toc-text">关键概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logger"><span class="toc-number">2.1.</span> <span class="toc-text">Logger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handler"><span class="toc-number">2.2.</span> <span class="toc-text">Handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Formatter"><span class="toc-number">2.3.</span> <span class="toc-text">Formatter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter"><span class="toc-number">2.4.</span> <span class="toc-text">Filter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用日志模块"><span class="toc-number">3.</span> <span class="toc-text">使用日志模块</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性变换的几何解释"><span class="toc-number">1.</span> <span class="toc-text">线性变换的几何解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#奇异值分解"><span class="toc-number">2.</span> <span class="toc-text">奇异值分解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例：数据压缩"><span class="toc-number">3.</span> <span class="toc-text">例：数据压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
 		
 		</div>
 		
-		<p>python的标准库里的日志系统从Python2.3开始支持。只要import logging这个模块即可使用。</p>
+		<p>奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。</p>
 <a id="more"></a>
-<h1 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h1><p>下表中的日志级别从上往下以此升高。logging只会输出比设定级别高的日志信息。</p>
-<table>
-<thead>
-<tr>
-<th>级别</th>
-<th>何时使用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEBUG</td>
-<td>详细信息，典型地调试问题时会感兴趣。</td>
-</tr>
-<tr>
-<td>INFO</td>
-<td>证明事情按预期工作。</td>
-</tr>
-<tr>
-<td>WARNING</td>
-<td>表明发生了一些意外，或者不久的将来会发生问题（如‘磁盘满了’）。软件还是在正常工作。</td>
-</tr>
-<tr>
-<td>ERROR</td>
-<td>由于更严重的问题，软件已不能执行一些功能了。</td>
-</tr>
-<tr>
-<td>CRITICAL</td>
-<td>严重错误，表明软件已不能继续运行了。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h1><p><code>Logger</code>，<code>Handler</code>，<code>Formatter</code>和<code>Filter</code>是日志模块的几个基本概念，日志模块的工作原理要从这四个基本概念说起。</p>
+<h1 id="线性变换的几何解释"><a href="#线性变换的几何解释" class="headerlink" title="线性变换的几何解释"></a>线性变换的几何解释</h1><p>首先，我们来看一个只有两行两列的简单矩阵。</p>
+<p>$$\begin{equation}<br>\mathbf{M}=<br>\begin{bmatrix}<br>    2 &amp; 1 \\<br>    1 &amp; 2<br>\end{bmatrix}<br>\end{equation}$$</p>
+<p>从几何的角度，矩阵可以描述为一个变换：用矩阵乘法将平面上的点$(x,y)$ 变换成另外一个点 $(2x+y,x+2y)$ :</p>
+<p>$$\begin{equation}<br>    \begin{bmatrix}<br>    2 &amp; 1 \\<br>    1 &amp; 2 \end{bmatrix}<br>    \begin{bmatrix}<br>    x \\<br>    y \end{bmatrix}<br>    =<br>    \begin{bmatrix}<br>    2x+y \\<br>    x+2y \end{bmatrix}<br>    \nonumber<br>\end{equation}$$</p>
+<p>这种变换的效果如下：</p>
+<p><img title="矩阵变换" src="/imgs/ML/SVD/svd1.png" style="display:block;margin:auto"></p>
+<p>不过这张图貌似也并没有能够简洁、清晰的描述出上述矩阵变换的几何效果。然而，如果我们把网格旋转45度，再观察一下。</p>
+<p><img title="矩阵变换" src="/imgs/ML/SVD/svd2.png" style="display:block;margin:auto"></p>
+<p>我们看到现在这个新的网格在某一方向上被拉伸了3倍。</p>
+<p>如果我们有一个2*2的对称矩阵，可以证明，我们总是可以通过在平面上旋转网格，使得矩阵变换的效果恰好是在两个垂直的方向上对网格的拉伸或镜面反射。</p>
+<p>即给定一个对称矩阵 $M$ ，我们可以找到一组正交向量 $v_i$ 使得 $Mv_i$ 等于 $v_i$ 和标量的乘积；那就是</p>
+<p>$$\begin{equation}<br>    Mv_i = \lambda_i v_i<br>\end{equation}$$</p>
+<p>这里$\lambda_i$ 是标量。从几何意义上讲，这意味着当$v_i$ 乘上矩阵 $M$ 时被简单地拉伸或者反射了。因为这个性质，我们称 $v_i$ 是 $M$ 的特征向量；标量 $\lambda_i$ 被称为特征值。一个可以被证明的重要的事实是：对称矩阵不同的特征值对应的特征向量是正交的。如果我们把对称矩阵的特征向量和网格对齐，那么矩阵对网格的拉伸或反射的方式，与矩阵对特征向量的拉伸或反射的方式，两者是完全一致的。</p>
+<h1 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h1><p>2*2矩阵奇异值分解的几何实质是：对于任意2*2矩阵，总能找到某个正交网格到另一个正交网格的转换与矩阵变换相对应。</p>
+<p>用向量解释这个现象：选择适当的正交的单位向量 $v_1$ 和$v_2$ ，向量 $Mv_i$ 和 $Mv_2$ 也是正交的。</p>
+<p><img title="矩阵变换" src="/imgs/ML/SVD/svd3.png" style="display:block;margin:auto"></p>
+<p>用 $u_1$ 和 $u_2$ 来表示 $Mv_1$ 和 $Mv_2$ 方向上的单位向量。 $Mv_1$ 和 $Mv_2$ 的长度用$\sigma_1$ 和  $\sigma_2$ 来表示——量化了网格在特定方向上被拉伸的效果。 $\sigma_1$ 和  $\sigma_2$ 被称为 $M$ 的奇异值。</p>
+<p>由此，我们有</p>
+<p>$$\begin{equation}<br>    Mv_1 = \sigma_1 u_1\\\<br>    Mv_2 = \sigma_2 u_2<br>\end{equation}$$</p>
+<p>因为向量 $v_1$ 和 $v_2$ 是正交的单位向量，我们有</p>
+<p>$$\begin{equation}<br>    x = (v_1 \cdot x)v_1 + (v_2 \cdot x)v_2<br>\end{equation}$$</p>
+<p>$v_1 \cdot x$ 为单位向量与向量的内积，表示向量在该单位向量方向上的投影。</p>
+<p>则有：</p>
+<p>$$\begin{eqnarray}<br>    Mx &amp;=&amp; (v_1 \cdot x)Mv_1 + (v_2 \cdot x)Mv_2 \\<br>    &amp;=&amp; (v_1 \cdot x)\sigma_1 u_1 + (v_2 \cdot x)\sigma_2 u_2<br>\end{eqnarray}$$</p>
+<p>注意点积（标量）可以用向量的转置来计算:</p>
+<p>$$\begin{equation}<br>    v \cdot x = v^T x<br>\end{equation}$$</p>
+<p>又有：</p>
+<p>$$\begin{equation}<br>    Mx = u_1\sigma_1 v_1^T x + u_2\sigma_2 v_2^T x \\<br>    M = u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T<br>\end{equation}$$</p>
+<p>即有：<br>$$\begin{eqnarray}<br>    M &amp;=&amp;<br>    \left[\begin{matrix}<br>    u_1 &amp; u_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    \sigma_1 &amp; \\<br>    &amp;\sigma_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    v_1 &amp; v_2<br>    \end{matrix}\right]^T \\<br>    &amp;=&amp;<br>    \left[\begin{matrix}<br>    \sigma_1u_1 &amp; \sigma_2u_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    v_1^T \\ v_2^T<br>    \end{matrix}\right] \\<br>    &amp;=&amp;<br>    u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T<br>\end{eqnarray}$$</p>
+<p>将上式写成矩阵相乘的形式有：</p>
+<p>$$\begin{equation}<br>    M = UΣV^T<br>\end{equation}$$</p>
+<p>这里 $U$ 是列向量 $u_1$ 和 $u_2$ 组成的矩阵，$Σ$ 是非零项为 $\sigma_1$ 和 $\sigma_2$ 的对角矩阵， $V$ 是列向量 $v_1$ 和 $v_2$ 组成的矩阵。</p>
+<p>则有：</p>
+<p>$$\begin{equation}<br>    MM^T=U(ΣΣ^T)U^T \\<br>    M^T M = V(Σ^T Σ)V^T<br>\end{equation}$$</p>
+<p>关系式的右边描述了关系式左边的特征值分解。于是：</p>
 <ul>
-<li><code>Logger</code> 即记录器，<code>Logger</code>提供了日志相关功能的调用接口。</li>
-<li><code>Handler</code> 即处理器，将（记录器产生的）日志记录发送至合适的目的地。</li>
-<li><code>Filter</code> 即过滤器，提供了更好的粒度控制，它可以决定输出哪些日志记录。</li>
-<li><code>Formatter</code> 即格式化器，指明了最终输出中日志记录的格式。</li>
+<li>$U$ 的列向量（左奇异向量）是 $MM^T$ 的特征向量。</li>
+<li>$V$ 的列向量（右奇异向量）是 $M^T M$ 的特征向量。</li>
+<li>$Σ$ 的非零对角元（非零奇异值）是 $MM^T$ 或者 $M^T M$ 的非零特征值的平方根。</li>
 </ul>
-<h2 id="Logger"><a href="#Logger" class="headerlink" title="Logger"></a>Logger</h2><p><code>Logger</code> 即“记录器”，<code>Logger</code>对象实例是日志记录功能的载体，如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/local/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">logger = logging.getLogger(<span class="string">'simple_example'</span>)</div><div class="line">logger.debug(<span class="string">'debug message'</span>)</div><div class="line">logger.info(<span class="string">'info message'</span>)</div><div class="line">logger.warn(<span class="string">'warn message'</span>)</div><div class="line">logger.error(<span class="string">'error message'</span>)</div><div class="line">logger.critical(<span class="string">'critical message'</span>)</div></pre></td></tr></table></figure>
-<p>值得一提的是，<code>Logger</code>对象从不直接实例化，而是通过模块级的功能<code>logging.getLogger(name)</code>创建<code>Logger</code>实例。调用 <code>logging.getLogger(name)</code> 功能时，如果传入的<code>name</code>参数值相同，则总是返回同一个<code>Logger</code>对象实例的引用。</p>
-<p>如果没有显式的进行创建，则默认创建一个<code>root logger</code>，并应用默认的日志级别(<code>WARN</code>)、默认的处理器<code>Handler</code>(<code>StreamHandler</code>，即将日志信息打印输出在标准输出上)，和默认的格式化器<code>Formatter</code>(默认的格式即为第一个简单使用程序中输出的格式)。</p>
-<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p><code>Handler</code> 将日志信息发送到设置的位置，可以通过<code>Logger</code>对象的<code>addHandler()</code>方法为<code>Logger</code>对象添加0个或多个<code>handler</code>。一种日志的典型应用场景为，系统希望将所有的日志信息保存到<code>log</code>文件中，其中日志等级等于或高于<code>ERROR</code>的消息还要在屏幕标准输出上显示，日志等级为<code>CRITICAL</code>的还需要发送邮件通知；这种场景就需要3个独立的<code>handler</code>来实现需求，这三个<code>handler</code>分别与指定的日志等级或日志位置做响应</p>
-<p>需要一提的是，为<code>Logger</code>配置的<code>handler</code>不能是<code>Handler</code>基类对象，而是<code>Handler</code>的子类对象，常用的<code>Handler</code>为<code>StreamHandler</code>, <code>FileHandler</code>和<code>NullHandler</code>。</p>
-<h2 id="Formatter"><a href="#Formatter" class="headerlink" title="Formatter"></a>Formatter</h2><p><code>Formatter</code> 用于设置日志输出的格式，与前两个基本概念不同的是，该类可以直接初始化对象，即 <code>formatter=logging.Formatter(fmt=None, datefmt=None)</code>，创建<code>formatter</code>时，传入分别<code>fmt</code>和<code>datefmt</code>参数来修改日志格式和时间格式，默认的日志格式为<code>%(asctime)s - %(levelname)s - %(message)s</code>，默认的时间格式为<code>%Y-%m-%d %H:%M:%S</code></p>
-<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p><code>Filter</code>可用于<code>Logger</code>对象或<code>Handler</code>对象，用于提供比日志等级更加复杂的日志过滤方式。默认的<code>filter</code>只允许在指定<code>logger</code>层级下的日志消息通过过滤。例如，如果把<code>filter</code>设置为<code>filter=logging.Filter(&#39;A.B&#39;)</code>，则<code>‘A.B’</code>, <code>‘A.B.C’</code>, <code>‘A.B.C.D’</code>, <code>‘A.B.D’</code> 产生的日志信息可以通过过滤，但<code>&#39;A.BB&#39;</code>, <code>&#39;B.A.B&#39;</code>均不行。如果以空字符串初始化<code>filter</code>，则所有的日志消息都可以通过过滤。</p>
-<p><code>Filter</code>在日志功能配置中是非必须的，只在对日志消息过滤需求比较复杂时配置使用即可。</p>
-<h1 id="使用日志模块"><a href="#使用日志模块" class="headerlink" title="使用日志模块"></a>使用日志模块</h1><p>如果只需要在控制台输出日志信息，可以用如下格式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">logging.basicConfig(level=logging.DEBUG,format=<span class="string">'%(levelname)s: %(asctime)s - %(filename)s:%(lineno)s - %(message)s'</span>)</div><div class="line">logging.info(<span class="string">'info logging'</span>)</div></pre></td></tr></table></figure>
-<p>日志也可以同时在控制台和文件中输出，例如如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line"><span class="comment"># 创建一个logger</span></div><div class="line">logger = logging.getLogger(<span class="string">'mylogger'</span>)</div><div class="line">logger.setLevel(logging.DEBUG)</div><div class="line"></div><div class="line"><span class="comment"># 创建一个handler，用于写入日志文件</span></div><div class="line">fh = logging.FileHandler(<span class="string">'test.log'</span>)</div><div class="line">fh.setLevel(logging.DEBUG)</div><div class="line"></div><div class="line"><span class="comment"># 再创建一个handler，用于输出到控制台</span></div><div class="line">ch = logging.StreamHandler()</div><div class="line">ch.setLevel(logging.DEBUG)</div><div class="line"></div><div class="line"><span class="comment"># 定义handler的输出格式</span></div><div class="line">formatter = logging.Formatter(<span class="string">'%(asctime)s - %(name)s - %(levelname)s - %(message)s'</span>)</div><div class="line">fh.setFormatter(formatter)</div><div class="line">ch.setFormatter(formatter)</div><div class="line"></div><div class="line"><span class="comment"># 给logger添加handler</span></div><div class="line">logger.addHandler(fh)</div><div class="line">logger.addHandler(ch)</div><div class="line"></div><div class="line"><span class="comment"># 记录一条日志</span></div><div class="line">logger.info(<span class="string">'foorbar'</span>)</div></pre></td></tr></table></figure>  
+<p>上面描述了怎样将矩阵 $M$ 分解成三个矩阵的乘积： $V$ 描述了原始空间中的正交基， $U$ 描述了相关空间的正交基， $Σ$ 描述了 $V$ 中的向量变成 $U$ 中的向量时被拉伸的倍数。</p>
+<h1 id="例：数据压缩"><a href="#例：数据压缩" class="headerlink" title="例：数据压缩"></a>例：数据压缩</h1><p>奇异值分解可以高效的表示数据。例如，假设我们想传送下列图片，包含15*25个黑色或者白色的像素阵列。</p>
+<p><img title="例1" src="/imgs/ML/SVD/svd_example1.png" style="display:block;margin:auto"></p>
+<p>因为在图像中只有三种类型的列（如下），它可以以更紧凑的形式被表示。</p>
+<p><img title="例2" src="/imgs/ML/SVD/svd_example2.png" style="display:block;margin:auto"></p>
+<p>我们用15*25的矩阵来表示这个图像，其中每个元素非0即1，0表示黑色像素，1表示白色像素。如下所示，共有375个元素。</p>
+<p><img title="例3" src="/imgs/ML/SVD/svd_example3.png" style="display:block;margin:auto"></p>
+<p>如果对M进行奇异值分解的话，我们只会得到三个非零的奇异值。</p>
+<p>$$\begin{equation}<br>    \sigma_1 = 14.72 \\<br>    \sigma_2 = 5.22 \\<br>    \sigma_3 = 3.31 \\<br>\end{equation}$$</p>
+<p>因此，矩阵可以如下表示</p>
+<p>$$\begin{equation}<br>    M = u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T + u_3\sigma_3 v_3^T<br>\end{equation}$$</p>
+<p>我们有三个包含15个元素的向量 $v_i$ ，三个包含25个元素的向量 $u_i$ ，以及三个奇异值 $\sigma_i$ 。这意味着我们可以只用123个数字就能表示这个矩阵而不是出现在矩阵中的375个元素。在这种方式下，我们看到在矩阵中有3个线性独立的列，也就是说矩阵的秩是3。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
+<p><a href="http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89//" target="_blank" rel="external">奇异值分解（We Recommend a Singular Value Decomposition）</a></p>
+</blockquote>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/python/">python</a>
+  <a class="article-category-link" href="/categories/ML/">ML</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/python/">python</a><a href="/tags/日志/">日志</a>
+  <span></span> <a href="/tags/ML/">ML</a><a href="/tags/SVD/">SVD</a><a href="/tags/math/">math</a>
   </div>
 
 </div>
@@ -177,7 +189,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/Python日志模块/" data-title="Python日志模块 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/04/06/奇异值分解-SVD/" data-title="奇异值分解 SVD | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -191,21 +203,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/31/搭建Hexo博客/" title="搭建Hexo博客">
+ <a href="/2017/04/01/Logistic-Regression/" title="Logistic Regression">
   <strong>上一篇：</strong><br/>
   <span>
-  搭建Hexo博客</span>
+  Logistic Regression</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/03/31/Python-split保留分隔符/"  title="Python split保留分隔符">
- <strong>下一篇：</strong><br/> 
- <span>Python split保留分隔符
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -217,7 +221,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#日志级别"><span class="toc-number">1.</span> <span class="toc-text">日志级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#关键概念"><span class="toc-number">2.</span> <span class="toc-text">关键概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logger"><span class="toc-number">2.1.</span> <span class="toc-text">Logger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handler"><span class="toc-number">2.2.</span> <span class="toc-text">Handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Formatter"><span class="toc-number">2.3.</span> <span class="toc-text">Formatter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter"><span class="toc-number">2.4.</span> <span class="toc-text">Filter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用日志模块"><span class="toc-number">3.</span> <span class="toc-text">使用日志模块</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性变换的几何解释"><span class="toc-number">1.</span> <span class="toc-text">线性变换的几何解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#奇异值分解"><span class="toc-number">2.</span> <span class="toc-text">奇异值分解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例：数据压缩"><span class="toc-number">3.</span> <span class="toc-text">例：数据压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
  
   </div>
 
