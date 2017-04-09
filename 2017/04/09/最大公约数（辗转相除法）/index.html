@@ -4,31 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>奇异值分解 SVD | Liao&#39;s Blog</title>
+    <title>最大公约数（辗转相除法） | Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
-<meta name="keywords" content="ML,SVD,math">
+    <meta name="description" content="辗转相除法，又称欧几里得算法，是求最大公约数(Greatest Common Divisor)的算法。">
+<meta name="keywords" content="math,gcd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="奇异值分解 SVD">
-<meta property="og:url" content="https://comwork2016.github.io/2017/04/06/奇异值分解-SVD/index.html">
+<meta property="og:title" content="最大公约数（辗转相除法）">
+<meta property="og:url" content="https://comwork2016.github.io/2017/04/09/最大公约数（辗转相除法）/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd1.png">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd2.png">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd3.png">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example1.png">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example2.png">
-<meta property="og:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd_example3.png">
-<meta property="og:updated_time" content="2017-04-06T01:30:48.946Z">
+<meta property="og:description" content="辗转相除法，又称欧几里得算法，是求最大公约数(Greatest Common Divisor)的算法。">
+<meta property="og:updated_time" content="2017-04-09T08:33:04.463Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奇异值分解 SVD">
-<meta name="twitter:description" content="奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。">
-<meta name="twitter:image" content="https://comwork2016.github.io/imgs/ML/SVD/svd1.png">
+<meta name="twitter:title" content="最大公约数（辗转相除法）">
+<meta name="twitter:description" content="辗转相除法，又称欧几里得算法，是求最大公约数(Greatest Common Divisor)的算法。">
 
     
     
@@ -90,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/06/奇异值分解-SVD/" title="奇异值分解 SVD" itemprop="url">奇异值分解 SVD</a>
+      <a href="/2017/04/09/最大公约数（辗转相除法）/" title="最大公约数（辗转相除法）" itemprop="url">最大公约数（辗转相除法）</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-06T00:56:22.000Z" itemprop="datePublished"> 发表于 2017-04-06</time>
+    <time datetime="2017-04-09T08:06:44.000Z" itemprop="datePublished"> 发表于 2017-04-09</time>
     
   </p>
 </header>
@@ -106,67 +99,29 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性变换的几何解释"><span class="toc-number">1.</span> <span class="toc-text">线性变换的几何解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#奇异值分解"><span class="toc-number">2.</span> <span class="toc-text">奇异值分解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例：数据压缩"><span class="toc-number">3.</span> <span class="toc-text">例：数据压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法描述"><span class="toc-number">1.</span> <span class="toc-text">算法描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理证明"><span class="toc-number">2.</span> <span class="toc-text">原理证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算法实现-c"><span class="toc-number">3.</span> <span class="toc-text">算法实现(c++)</span></a></li></ol>
 		
 		</div>
 		
-		<p>奇异值分解(Singular Value Decomposition，以下简称SVD)是在机器学习领域广泛应用的算法，它不光可以用于降维算法中的特征分解，还可以用于推荐系统，以及自然语言处理等领域。是很多机器学习算法的基石。</p>
+		<p>辗转相除法，又称欧几里得算法，是求最大公约数(Greatest Common Divisor)的算法。</p>
 <a id="more"></a>
-<h1 id="线性变换的几何解释"><a href="#线性变换的几何解释" class="headerlink" title="线性变换的几何解释"></a>线性变换的几何解释</h1><p>首先，我们来看一个只有两行两列的简单矩阵。</p>
-<p>$$\begin{equation}<br>\mathbf{M}=<br>\begin{bmatrix}<br>    2 &amp; 1 \\<br>    1 &amp; 2<br>\end{bmatrix}<br>\end{equation}$$</p>
-<p>从几何的角度，矩阵可以描述为一个变换：用矩阵乘法将平面上的点$(x,y)$ 变换成另外一个点 $(2x+y,x+2y)$ :</p>
-<p>$$\begin{equation}<br>    \begin{bmatrix}<br>    2 &amp; 1 \\<br>    1 &amp; 2 \end{bmatrix}<br>    \begin{bmatrix}<br>    x \\<br>    y \end{bmatrix}<br>    =<br>    \begin{bmatrix}<br>    2x+y \\<br>    x+2y \end{bmatrix}<br>    \nonumber<br>\end{equation}$$</p>
-<p>这种变换的效果如下：</p>
-<p><img title="矩阵变换" src="/imgs/ML/SVD/svd1.png" style="display:block;margin:auto"></p>
-<p>不过这张图貌似也并没有能够简洁、清晰的描述出上述矩阵变换的几何效果。然而，如果我们把网格旋转45度，再观察一下。</p>
-<p><img title="矩阵变换" src="/imgs/ML/SVD/svd2.png" style="display:block;margin:auto"></p>
-<p>我们看到现在这个新的网格在某一方向上被拉伸了3倍。</p>
-<p>如果我们有一个2*2的对称矩阵，可以证明，我们总是可以通过在平面上旋转网格，使得矩阵变换的效果恰好是在两个垂直的方向上对网格的拉伸或镜面反射。</p>
-<p>即给定一个对称矩阵 $M$ ，我们可以找到一组正交向量 $v_i$ 使得 $Mv_i$ 等于 $v_i$ 和标量的乘积；那就是</p>
-<p>$$\begin{equation}<br>    Mv_i = \lambda_i v_i<br>\end{equation}$$</p>
-<p>这里$\lambda_i$ 是标量。从几何意义上讲，这意味着当$v_i$ 乘上矩阵 $M$ 时被简单地拉伸或者反射了。因为这个性质，我们称 $v_i$ 是 $M$ 的特征向量；标量 $\lambda_i$ 被称为特征值。一个可以被证明的重要的事实是：对称矩阵不同的特征值对应的特征向量是正交的。如果我们把对称矩阵的特征向量和网格对齐，那么矩阵对网格的拉伸或反射的方式，与矩阵对特征向量的拉伸或反射的方式，两者是完全一致的。</p>
-<h1 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h1><p>2*2矩阵奇异值分解的几何实质是：对于任意2*2矩阵，总能找到某个正交网格到另一个正交网格的转换与矩阵变换相对应。</p>
-<p>用向量解释这个现象：选择适当的正交的单位向量 $v_1$ 和$v_2$ ，向量 $Mv_i$ 和 $Mv_2$ 也是正交的。</p>
-<p><img title="矩阵变换" src="/imgs/ML/SVD/svd3.png" style="display:block;margin:auto"></p>
-<p>用 $u_1$ 和 $u_2$ 来表示 $Mv_1$ 和 $Mv_2$ 方向上的单位向量。 $Mv_1$ 和 $Mv_2$ 的长度用$\sigma_1$ 和  $\sigma_2$ 来表示——量化了网格在特定方向上被拉伸的效果。 $\sigma_1$ 和  $\sigma_2$ 被称为 $M$ 的奇异值。</p>
-<p>由此，我们有</p>
-<p>$$\begin{equation}<br>    Mv_1 = \sigma_1 u_1\\\<br>    Mv_2 = \sigma_2 u_2<br>\end{equation}$$</p>
-<p>因为向量 $v_1$ 和 $v_2$ 是正交的单位向量，我们有</p>
-<p>$$\begin{equation}<br>    x = (v_1 \cdot x)v_1 + (v_2 \cdot x)v_2<br>\end{equation}$$</p>
-<p>$v_1 \cdot x$ 为单位向量与向量的内积，表示向量在该单位向量方向上的投影。</p>
-<p>则有：</p>
-<p>$$\begin{eqnarray}<br>    Mx &amp;=&amp; (v_1 \cdot x)Mv_1 + (v_2 \cdot x)Mv_2 \\<br>    &amp;=&amp; (v_1 \cdot x)\sigma_1 u_1 + (v_2 \cdot x)\sigma_2 u_2<br>\end{eqnarray}$$</p>
-<p>注意点积（标量）可以用向量的转置来计算:</p>
-<p>$$\begin{equation}<br>    v \cdot x = v^T x<br>\end{equation}$$</p>
-<p>又有：</p>
-<p>$$\begin{equation}<br>    Mx = u_1\sigma_1 v_1^T x + u_2\sigma_2 v_2^T x \\<br>    M = u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T<br>\end{equation}$$</p>
-<p>即有：<br>$$\begin{eqnarray}<br>    M &amp;=&amp;<br>    \left[\begin{matrix}<br>    u_1 &amp; u_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    \sigma_1 &amp; \\<br>    &amp;\sigma_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    v_1 &amp; v_2<br>    \end{matrix}\right]^T \\<br>    &amp;=&amp;<br>    \left[\begin{matrix}<br>    \sigma_1u_1 &amp; \sigma_2u_2<br>    \end{matrix}\right]<br>    \left[\begin{matrix}<br>    v_1^T \\ v_2^T<br>    \end{matrix}\right] \\<br>    &amp;=&amp;<br>    u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T<br>\end{eqnarray}$$</p>
-<p>将上式写成矩阵相乘的形式有：</p>
-<p>$$\begin{equation}<br>    M = UΣV^T<br>\end{equation}$$</p>
-<p>这里 $U$ 是列向量 $u_1$ 和 $u_2$ 组成的矩阵，$Σ$ 是非零项为 $\sigma_1$ 和 $\sigma_2$ 的对角矩阵， $V$ 是列向量 $v_1$ 和 $v_2$ 组成的矩阵。</p>
-<p>则有：</p>
-<p>$$\begin{equation}<br>    MM^T=U(ΣΣ^T)U^T \\<br>    M^T M = V(Σ^T Σ)V^T<br>\end{equation}$$</p>
-<p>关系式的右边描述了关系式左边的特征值分解。于是：</p>
-<ul>
-<li>$U$ 的列向量（左奇异向量）是 $MM^T$ 的特征向量。</li>
-<li>$V$ 的列向量（右奇异向量）是 $M^T M$ 的特征向量。</li>
-<li>$Σ$ 的非零对角元（非零奇异值）是 $MM^T$ 或者 $M^T M$ 的非零特征值的平方根。</li>
-</ul>
-<p>上面描述了怎样将矩阵 $M$ 分解成三个矩阵的乘积： $V$ 描述了原始空间中的正交基， $U$ 描述了相关空间的正交基， $Σ$ 描述了 $V$ 中的向量变成 $U$ 中的向量时被拉伸的倍数。</p>
-<h1 id="例：数据压缩"><a href="#例：数据压缩" class="headerlink" title="例：数据压缩"></a>例：数据压缩</h1><p>奇异值分解可以高效的表示数据。例如，假设我们想传送下列图片，包含15*25个黑色或者白色的像素阵列。</p>
-<p><img title="例1" src="/imgs/ML/SVD/svd_example1.png" style="display:block;margin:auto"></p>
-<p>因为在图像中只有三种类型的列（如下），它可以以更紧凑的形式被表示。</p>
-<p><img title="例2" src="/imgs/ML/SVD/svd_example2.png" style="display:block;margin:auto"></p>
-<p>我们用15*25的矩阵来表示这个图像，其中每个元素非0即1，0表示黑色像素，1表示白色像素。如下所示，共有375个元素。</p>
-<p><img title="例3" src="/imgs/ML/SVD/svd_example3.png" style="display:block;margin:auto"></p>
-<p>如果对M进行奇异值分解的话，我们只会得到三个非零的奇异值。</p>
-<p>$$\begin{equation}<br>    \sigma_1 = 14.72 \\<br>    \sigma_2 = 5.22 \\<br>    \sigma_3 = 3.31 \\<br>\end{equation}$$</p>
-<p>因此，矩阵可以如下表示</p>
-<p>$$\begin{equation}<br>    M = u_1\sigma_1 v_1^T + u_2\sigma_2 v_2^T + u_3\sigma_3 v_3^T<br>\end{equation}$$</p>
-<p>我们有三个包含15个元素的向量 $v_i$ ，三个包含25个元素的向量 $u_i$ ，以及三个奇异值 $\sigma_i$ 。这意味着我们可以只用123个数字就能表示这个矩阵而不是出现在矩阵中的375个元素。在这种方式下，我们看到在矩阵中有3个线性独立的列，也就是说矩阵的秩是3。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
-<p><a href="http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89//" target="_blank" rel="external">奇异值分解（We Recommend a Singular Value Decomposition）</a></p>
-</blockquote>
+<h1 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h1><p>设两数为$a$、$b$ $(a&gt;b)$，求$a$和$b$最大公约数$gcd(a，b)$的步骤如下：</p>
+<ol>
+<li>用$b$除$a$，得$a÷b=q……r(0\leq r)$。</li>
+<li>若$r=0$，则$gcd(a,b)=b$；结束。</li>
+<li>若$r≠0$，取$a=b,b=r$，执行第1步。</li>
+</ol>
+<h1 id="原理证明"><a href="#原理证明" class="headerlink" title="原理证明"></a>原理证明</h1><p>设两数为$a$、$b$ $(b\leq a)$，用$gcd(a,b)$表示$a$，$b$的最大公约数，$r=a\ mod\ b $为$a$除以$b$以后的余数，$k$为$a$除以$b$的商，即$a÷b=k…….r$。</p>
+<p>辗转相除法即是要证明$gcd(a,b)=gcd(b,r)$。</p>
+<ol>
+<li>令$c=gcd(a,b)$，则设$a=mc$，$b=nc$</li>
+<li>则$r =a-kb=mc-knc=(m-kn)c$</li>
+<li>即$c$也是$r$的因数</li>
+<li>可以断定$m-kn$与$n$互素【否则，可设$m-kn=xd$，$n=yd$，$(d&gt;1)$，则$m=kn+xd=kyd+xd=(ky+x)d$，则$a=mc=(ky+x)dc$，$b=nc=ycd$，故$a$与$b$最大公约数成为$cd$，而非$c$，与前面结论矛盾】</li>
+</ol>
+<p>从而可知$gcd(b,r)=c$，继而$gcd(a,b)=gcd(b,r)$。</p>
+<h1 id="算法实现-c"><a href="#算法实现-c" class="headerlink" title="算法实现(c++)"></a>算法实现(c++)</h1><p>递归方式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(b == <span class="number">0</span>)</div><div class="line">    	<span class="keyword">return</span> b;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    	<span class="keyword">return</span> gcd(b, a % b)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>迭代方式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>(b != <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> r = a % b;</div><div class="line">        a = b;</div><div class="line">        b = r;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -174,13 +129,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/ML/">ML</a>
+  <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/ML/">ML</a><a href="/tags/SVD/">SVD</a><a href="/tags/math/">math</a>
+  <span></span> <a href="/tags/math/">math</a><a href="/tags/gcd/">gcd</a>
   </div>
 
 </div>
@@ -189,7 +144,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://comwork2016.github.io/2017/04/06/奇异值分解-SVD/" data-title="奇异值分解 SVD | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
+	  <div data-url="https://comwork2016.github.io/2017/04/09/最大公约数（辗转相除法）/" data-title="最大公约数（辗转相除法） | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -203,21 +158,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/01/Logistic-Regression/" title="Logistic Regression">
+ <a href="/2017/04/06/奇异值分解-SVD/" title="奇异值分解 SVD">
   <strong>上一篇：</strong><br/>
   <span>
-  Logistic Regression</span>
+  奇异值分解 SVD</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2017/04/09/最大公约数（辗转相除法）/"  title="最大公约数（辗转相除法）">
- <strong>下一篇：</strong><br/> 
- <span>最大公约数（辗转相除法）
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -229,7 +176,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#线性变换的几何解释"><span class="toc-number">1.</span> <span class="toc-text">线性变换的几何解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#奇异值分解"><span class="toc-number">2.</span> <span class="toc-text">奇异值分解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例：数据压缩"><span class="toc-number">3.</span> <span class="toc-text">例：数据压缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法描述"><span class="toc-number">1.</span> <span class="toc-text">算法描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理证明"><span class="toc-number">2.</span> <span class="toc-text">原理证明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#算法实现-c"><span class="toc-number">3.</span> <span class="toc-text">算法实现(c++)</span></a></li></ol>
  
   </div>
 
