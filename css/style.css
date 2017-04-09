@@ -1411,6 +1411,7 @@ footer.article-footer {
 .article-nav a {
   display: inline-block;
   overflow: hidden;
+  padding: 0 10px;
 }
 .article-nav .prev a:hover,
 .article-nav .next a:hover {
