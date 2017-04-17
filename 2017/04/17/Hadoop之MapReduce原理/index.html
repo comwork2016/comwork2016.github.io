@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://comwork2016.github.io/imgs/Hadoop/mapreduce/shuffle.png">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/Hadoop/mapreduce/map-shuffle.png">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/Hadoop/mapreduce/reduce-shuffle.png">
-<meta property="og:updated_time" content="2017-04-17T08:57:16.723Z">
+<meta property="og:updated_time" content="2017-04-17T09:08:56.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop之MapReduce原理">
 <meta name="twitter:description" content="Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应用程序能够运行在由上千个商用机器组成的大型集群上，并以一种可靠容错的方式并行处理上T级别的数据集。">
@@ -231,7 +231,7 @@
 <p>这里需要强调的是，merge有三种形式：1)内存到内存 2)内存到磁盘 3)磁盘到磁盘。默认情况下第一种形式是不启用的。当内存中的数据量到达一定阈值，就启动内存到磁盘的merge（图中的第一个merge，之所以进行merge是因为reduce端在从多个map端copy数据的时候，并没有进行sort，只是把它们加载到内存，当达到阈值写入磁盘时，需要进行merge） 。这和map端的很类似，这实际上就是溢写的过程，在这个过程中如果你设置有Combiner，它也是会启用的，然后在磁盘中生成了众多的溢写文件，这种merge方式一直在运行，直到没有 map 端的数据时才结束，然后才会启动第三种磁盘到磁盘的 merge （图中的第二个merge）方式生成最终的那个文件。</p>
 <p>在远程copy数据的同时，Reduce Task在后台启动了两个后台线程对内存和磁盘上的数据文件做合并操作，以防止内存使用过多或磁盘生的文件过多。</p>
 <h3 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h3><p>merge的最后会生成一个文件，大多数情况下存在于磁盘中，但是需要将其放入内存中。当reducer 输入文件已定，整个 Shuffle 阶段才算结束。然后就是 Reducer 执行，把结果放到 HDFS 上。</p>
-<p>Reduce的数目建议是0.95或1.75乘以 (<code>&amp;lt;no. of nodes&amp;gt; * mapred.tasktracker.reduce.tasks.maximum</code>)。</p>
+<p>Reduce的数目建议是0.95或1.75乘以 (<code>&lt;no. of nodes&gt; * mapred.tasktracker.reduce.tasks.maximum</code>)。</p>
 <p>用0.95，所有reduce可以在maps一完成时就立刻启动，开始传输map的输出结果。用1.75，速度快的节点可以在完成第一轮reduce任务后，可以开始第二轮，这样可以得到比较好的负载均衡的效果。</p>
 <p>如果没有归约要进行，那么设置reduce任务的数目为零是合法的。这种情况下，map任务的输出会直接被写入由 setOutputPath(Path)指定的输出路径。框架在把它们写入FileSystem之前没有对它们进行排序。</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
