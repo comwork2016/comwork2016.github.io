@@ -4,24 +4,19 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>VC6.0不能停止调试程序的解决方案 | Liao&#39;s Blog</title>
+    <title>Liao&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="huangyedi2012">
     
 
     
-    <meta name="description" content="VC6.0在Windows7下调试的时候，再结束调试，程序无法退出。">
-<meta name="keywords" content="vc6.0">
-<meta property="og:type" content="article">
-<meta property="og:title" content="VC6.0不能停止调试程序的解决方案">
-<meta property="og:url" content="https://comwork2016.github.io/2017/03/31/VC6-0不能停止调试程序的解决方案/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Liao's Blog">
+<meta property="og:url" content="https://comwork2016.github.io/page/3/index.html">
 <meta property="og:site_name" content="Liao's Blog">
-<meta property="og:description" content="VC6.0在Windows7下调试的时候，再结束调试，程序无法退出。">
-<meta property="og:updated_time" content="2017-04-27T02:38:50.740Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VC6.0不能停止调试程序的解决方案">
-<meta name="twitter:description" content="VC6.0在Windows7下调试的时候，再结束调试，程序无法退出。">
+<meta name="twitter:title" content="Liao's Blog">
 
     
     
@@ -77,88 +72,34 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+      <div id="main">
+
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2017/03/31/搭建Hexo博客/" title="搭建Hexo博客" itemprop="url">
+  
+    <h1 itemprop="name">搭建Hexo博客</h1>
     
-      <a href="/2017/03/31/VC6-0不能停止调试程序的解决方案/" title="VC6.0不能停止调试程序的解决方案" itemprop="url">VC6.0不能停止调试程序的解决方案</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="huangyedi2012" target="_blank" itemprop="author">huangyedi2012</a>
-		
-  <p class="article-time">
-    <time datetime="2017-03-31T08:45:09.000Z" itemprop="datePublished"> 发表于 2017-03-31</time>
+     
+       <p itemprop="description" >本文主要记录Windows系统下搭建Hexo博客，以防遗忘！</p>
+      
     
-  </p>
-</header>
-	<div class="article-content">
-		
-		<p>VC6.0在Windows7下调试的时候，再结束调试，程序无法退出。</p>
-<a id="more"></a>
-<p><strong> 问题描述 </strong>：当我击F5开始一个项目的调试时，程序在我设置的断点处停止，这时按下Shift+F5后，VC6.0可以退出调试状态，但是windows系统的任务栏上会留下前面调试时产生的程序。该进程不能被结束，即使我使用任务管理器也不可以终止程序。而且，当修改代码之后，就不能重新编译了。想结束该进程的唯一的办法是关闭VC6.0，并重新开启。</p>
-<p><strong> 解决方案 </strong>：更新两个dll文件的版本。</p>
-<p>在VC6.0安装目录下的 Common/MSDev98/Bin 里有两个dll文件：DM.dll 和 TLLOC.dll。将DM.dll替换成6.0.9782.0版本的或更新，将TLLOC.dll替换成6.00.8168.0版本的或更新。</p>
-<p>C语言中文网提供了这两个dll文件的下载地址：<a href="http://pan.baidu.com/s/1eQHzLwm" target="_blank" rel="external">http://pan.baidu.com/s/1eQHzLwm</a> 提取密码：sg07</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/tools/">tools</a>
-</div>
+    <time datetime="2017-03-31T02:45:23.000Z" itemprop="datePublished">2017-03-31</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/vc6-0/">vc6.0</a>
-  </div>
+
+
+
+
+
+  <nav id="page-nav" class="clearfix unexpand">
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="https://comwork2016.github.io/2017/03/31/VC6-0不能停止调试程序的解决方案/" data-title="VC6.0不能停止调试程序的解决方案 | Liao&#39;s Blog" data-tsina="3751218471" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/03/31/intellij-idea-注册服务器/" title="intellij idea 注册服务器">
-  <strong>上一篇：</strong><br/>
-  <span>
-  intellij idea 注册服务器</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2017/03/31/ubuntu终端颜色配置/"  title="ubuntu终端颜色配置">
- <strong>下一篇：</strong><br/> 
- <span>ubuntu终端颜色配置
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-
-</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
@@ -413,81 +354,6 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
 
 
 
@@ -587,7 +453,7 @@ var _hmt = _hmt || [];
 <!-- Tiny_search End -->
 
   </body>
-</html>
+ </html>
 
 
 <a target="_blank" href="https://github.com/comwork2016"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
