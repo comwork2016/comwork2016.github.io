@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Liao's Blog">
 <meta property="og:description" content="本文记录的是Spark在Yarn上的集群安装部署。">
 <meta property="og:image" content="https://comwork2016.github.io/imgs/Spark/spark-install.png">
-<meta property="og:updated_time" content="2017-06-05T08:29:04.921Z">
+<meta property="og:updated_time" content="2017-06-05T08:31:32.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark On Yarn 集群安装部署">
 <meta name="twitter:description" content="本文记录的是Spark在Yarn上的集群安装部署。">
@@ -113,7 +113,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> SCALA_HOME=<span class="variable">$HOME</span>/<span class="built_in">local</span>/opt/scala-2.12.2</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$SCALA_HOME</span>/bin</div></pre></td></tr></table></figure>
 <p>验证 scala 是否安装成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scala -version        <span class="comment">#如果打印出如下版本信息，则说明安装成功</span></div></pre></td></tr></table></figure>
-<h2 id="安装配置-Hadoop-Yarn"><a href="#安装配置-Hadoop-Yarn" class="headerlink" title="安装配置 Hadoop Yarn"></a>安装配置 Hadoop Yarn</h2><p>Hadoop Yarn的安装见<a href="/2017/04/14/Hadoop-2-7-3-安装/">Hadoop 2.7.3 安装</a></p>
+<h2 id="安装配置-Hadoop-Yarn"><a href="#安装配置-Hadoop-Yarn" class="headerlink" title="安装配置 Hadoop Yarn"></a>安装配置 Hadoop Yarn</h2><p>Hadoop Yarn的安装见<a href="/2017/04/14/Hadoop-2-7-3-安装/">Hadoop 2.7.3 安装</a>。</p>
 <h1 id="Spark安装"><a href="#Spark安装" class="headerlink" title="Spark安装"></a>Spark安装</h1><h2 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h2><p>进入<a href="http://spark.apache.org/downloads.html" target="_blank" rel="external">官方下载地址</a>下载最新版Spark。</p>
 <p>在<code>~/local/opt</code>目录下解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xzvf spark-2.1.1-bin-hadoop2.7.tgz</div></pre></td></tr></table></figure>
